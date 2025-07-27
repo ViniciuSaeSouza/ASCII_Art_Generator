@@ -102,6 +102,4 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 Desenvolvido por [Vinícius Saes](https://www.linkedin.com/in/seu-linkedin)
 Entre em contato para trocar ideias ou colaborar com projetos de tecnologia!
 
-```
-
 ---
