@@ -70,7 +70,7 @@ git clone https://github.com/seu-usuario/ascii-art-converter.git
 cd ascii-art-converter
 
 # Execute
-dotnet run --project ./AsciiArtConverter
+dotnet run --project ASCII_ART_GENERATOR.exe
 ````
 ---
 
