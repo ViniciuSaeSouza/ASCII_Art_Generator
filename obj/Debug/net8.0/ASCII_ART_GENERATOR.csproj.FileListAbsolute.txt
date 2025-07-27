@@ -1,0 +1,17 @@
+C:\Users\Vinic\Documents\programacao\desafios\ASCII_Converter\bin\Debug\net8.0\ASCII_ART_GENERATOR.exe
+C:\Users\Vinic\Documents\programacao\desafios\ASCII_Converter\bin\Debug\net8.0\ASCII_ART_GENERATOR.deps.json
+C:\Users\Vinic\Documents\programacao\desafios\ASCII_Converter\bin\Debug\net8.0\ASCII_ART_GENERATOR.runtimeconfig.json
+C:\Users\Vinic\Documents\programacao\desafios\ASCII_Converter\bin\Debug\net8.0\ASCII_ART_GENERATOR.dll
+C:\Users\Vinic\Documents\programacao\desafios\ASCII_Converter\bin\Debug\net8.0\ASCII_ART_GENERATOR.pdb
+C:\Users\Vinic\Documents\programacao\desafios\ASCII_Converter\bin\Debug\net8.0\SixLabors.ImageSharp.dll
+C:\Users\Vinic\Documents\programacao\desafios\ASCII_Converter\obj\Debug\net8.0\ASCII_ART_GENERATOR.csproj.AssemblyReference.cache
+C:\Users\Vinic\Documents\programacao\desafios\ASCII_Converter\obj\Debug\net8.0\ASCII_ART_GENERATOR.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Vinic\Documents\programacao\desafios\ASCII_Converter\obj\Debug\net8.0\ASCII_ART_GENERATOR.AssemblyInfoInputs.cache
+C:\Users\Vinic\Documents\programacao\desafios\ASCII_Converter\obj\Debug\net8.0\ASCII_ART_GENERATOR.AssemblyInfo.cs
+C:\Users\Vinic\Documents\programacao\desafios\ASCII_Converter\obj\Debug\net8.0\ASCII_ART_GENERATOR.csproj.CoreCompileInputs.cache
+C:\Users\Vinic\Documents\programacao\desafios\ASCII_Converter\obj\Debug\net8.0\ASCII_AR.B736CBE2.Up2Date
+C:\Users\Vinic\Documents\programacao\desafios\ASCII_Converter\obj\Debug\net8.0\ASCII_ART_GENERATOR.dll
+C:\Users\Vinic\Documents\programacao\desafios\ASCII_Converter\obj\Debug\net8.0\refint\ASCII_ART_GENERATOR.dll
+C:\Users\Vinic\Documents\programacao\desafios\ASCII_Converter\obj\Debug\net8.0\ASCII_ART_GENERATOR.pdb
+C:\Users\Vinic\Documents\programacao\desafios\ASCII_Converter\obj\Debug\net8.0\ASCII_ART_GENERATOR.genruntimeconfig.cache
+C:\Users\Vinic\Documents\programacao\desafios\ASCII_Converter\obj\Debug\net8.0\ref\ASCII_ART_GENERATOR.dll
