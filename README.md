@@ -1,4 +1,4 @@
-# 🖼️ ASCII Art Converter
+# 🖼️ ASCII Art Generator
 
 Um projeto pessoal feito em C# com o objetivo de converter imagens em arte ASCII, utilizando manipulação de imagens com a biblioteca [ImageSharp](https://github.com/SixLabors/ImageSharp).
 
