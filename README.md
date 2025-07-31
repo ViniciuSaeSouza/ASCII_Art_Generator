@@ -70,7 +70,7 @@ git clone https://github.com/seu-usuario/ascii-art-converter.git
 cd ascii-art-converter
 
 # Execute
-dotnet run --project ./AsciiArtConverter
+dotnet run --project ASCII_ART_GENERATOR.exe
 ````
 ---
 
@@ -101,7 +101,5 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 Desenvolvido por [Vinícius Saes](https://www.linkedin.com/in/seu-linkedin)
 Entre em contato para trocar ideias ou colaborar com projetos de tecnologia!
-
-```
 
 ---
