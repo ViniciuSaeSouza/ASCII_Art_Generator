@@ -64,10 +64,10 @@ Alguns temas abordados:
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/ascii-art-converter.git
+git clone https://github.com/seu-usuario/ascii_art_generator.git
 
 # Navegue até o projeto
-cd ascii-art-converter
+cd ascii_art_generator
 
 # Execute
 dotnet run --project ASCII_ART_GENERATOR.exe
