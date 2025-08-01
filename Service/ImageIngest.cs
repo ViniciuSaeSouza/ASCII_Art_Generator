@@ -11,10 +11,8 @@ namespace ASCII_ART_GENERATOR.Service
         {
             try
             {
-                using (var image = Image.Load<Rgba32>(path))
-                {
-                    return image;
-                }
+                var image = Image.Load<Rgba32>(path);
+                return image;
             }
             catch (ArgumentNullException ex)
             {
@@ -24,11 +22,11 @@ namespace ASCII_ART_GENERATOR.Service
             {
                 throw new NotSupportedException(ex.Message);
             }
-            catch(InvalidImageContentException ex)
+            catch (InvalidImageContentException ex)
             {
                 throw new InvalidImageContentException(ex.Message);
             }
-            catch(UnknownImageFormatException ex)
+            catch (UnknownImageFormatException ex)
             {
                 throw new UnknownImageFormatException(ex.Message);
             }

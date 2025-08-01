@@ -8,17 +8,19 @@ public class Program
     {
         var basePath = "C:\\Users\\Vinic\\Documents\\programacao\\desafios\\ASCII_Art_Generator\\images\\";
         
-        var inputFileName = "k1.jpg";
+        var inputFileName = "vegeta.jpg";
         var inputFilePath = basePath + "source\\" + inputFileName;
 
-        var outPutFileName = "k1-gray.png";
+        var outPutFileName = "vegeta-gray.png";
         var outPutFilePath = basePath + "output\\" + outPutFileName;
 
-        using (FileStream fileStream = new FileStream(outPutFilePath, FileMode.Create))
+        using (FileStream outputFileStream = new FileStream(outPutFilePath, FileMode.Create))
         using (var image = ImageIngest.LoadImage(inputFilePath))
-        using (var imageGray = ImageColorConverter.ConvertToGray(image))
+        using (var imageGray = ImageColorConverter.ConvertToGrayScale(image))
         {
-            imageGray.SaveAsPng(fileStream);
+            image.SaveAsPng(outputFileStream);
         }
+
+
     }
 }

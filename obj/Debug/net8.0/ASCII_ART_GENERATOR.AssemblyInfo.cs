@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ASCII_ART_GENERATOR")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c5efb95aee87d0097155f74acf5c835dae7ceca")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+81397f8ccc7d6d4f00887ed2fc161ada0555c973")]
 [assembly: System.Reflection.AssemblyProductAttribute("ASCII_ART_GENERATOR")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ASCII_ART_GENERATOR")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
