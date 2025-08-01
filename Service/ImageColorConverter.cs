@@ -9,8 +9,6 @@ public static class ImageColorConverter
 {
     public static Image<Rgba32> ConvertToGrayScale(Image<Rgba32> image)
     {
-
-
         // Diagnostic's
         var stopWatchPixelRow = new Stopwatch();
         //var stopWatchPixelByPixel = new Stopwatch();
@@ -89,6 +87,26 @@ public static class ImageColorConverter
 
 
         return image;
+    }
+
+    public static void ConvertToBlackAndWhite(Image<Rgba32> image)
+    {
+        image.ProcessPixelRows(accessor =>
+        {
+            for (int y = 0; y < image.Height; y++)
+            {
+                var currentRow = accessor.GetRowSpan(y);
+                for (int x = 0; x < currentRow.Length; x++)
+                {
+                    ref var pixel = ref currentRow[x];
+
+                    var lightSumValue = (0.2126 * pixel.R) + (0.7152 * pixel.G) + (0.0722 * pixel.B);
+
+                    float lightFloatValue =(float) (lightSumValue >= 128 ? 1 : 0);
+                    pixel = new Rgba32(lightFloatValue, lightFloatValue, lightFloatValue, pixel.A);
+                }
+            }
+        });
     }
 
 }
