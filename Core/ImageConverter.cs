@@ -1,11 +1,15 @@
 ﻿using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
+using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace ASCII_ART_GENERATOR.Service;
 
-public static class ImageColorConverter
+public static class ImageConverter
 {
     public static Image<Rgba32> ConvertToGrayScale(Image<Rgba32> image)
     {
@@ -102,11 +106,54 @@ public static class ImageColorConverter
 
                     var lightSumValue = (0.2126 * pixel.R) + (0.7152 * pixel.G) + (0.0722 * pixel.B);
 
-                    float lightFloatValue =(float) (lightSumValue >= 128 ? 1 : 0);
+                    float lightFloatValue = (float)(lightSumValue >= 128 ? 1 : 0);
                     pixel = new Rgba32(lightFloatValue, lightFloatValue, lightFloatValue, pixel.A);
                 }
             }
         });
+    }
+
+    public static void ConvertGrayScaleToAscii(Image<Rgba32> grayImage)
+    {
+        // ASCII Character going from darkest do lightest
+        //var charsString = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,"^`'. ";
+        //var charsString = "\" .:-=+*#%@\""; 
+        var charsString = "=+*#%@"; // My favorite variance so far
+        var charList = charsString.ToCharArray().Reverse().ToArray();
+
+        var resizeWidth = (int)(grayImage.Width / 1.2);
+        var resizeHeight = (grayImage.Height);
+        grayImage.Mutate(x => x.Resize(resizeWidth, resizeHeight));
+
+        using (var fileStream = new FileStream($"lenna.txt", FileMode.Create))
+        {
+            grayImage.ProcessPixelRows(accessor =>
+            {
+                var charRow = new List<char>();
+
+                for (int y = 0; y < accessor.Height; y++)
+                {
+                    
+                    var currentRow = accessor.GetRowSpan(y);
+                    foreach (ref var pixel in currentRow)
+                    {
+                        //TODO: bring grayscale transform logic to here to convert colored images directly to ascii
+                        var index = (int)((pixel.R / 255.0) * (charList.Length - 1));
+                        charRow.Add(charList[index]);
+                    }
+
+                    charRow.Add('\n');
+                    
+                    var encoding = new UTF32Encoding();
+                    var bytes = encoding.GetBytes(charRow.ToArray());
+                    fileStream.Write(bytes, 0, bytes.Length);
+                    fileStream.Flush();
+                    charRow.Clear();
+                }
+            });
+        }
+
+
     }
 
 }
