@@ -11,6 +11,7 @@ namespace ASCII_ART_GENERATOR.Service;
 
 public static class ImageConverter
 {
+
     public static Image<Rgba32> ConvertToGrayScale(Image<Rgba32> image)
     {
         // Diagnostic's
@@ -113,19 +114,33 @@ public static class ImageConverter
         });
     }
 
-    public static void ConvertGrayScaleToAscii(Image<Rgba32> grayImage)
+    public static void ConvertGrayScaleToAscii(Image<Rgba32> grayImage, string path, string fileName)
     {
+        
+
+
         // ASCII Character going from darkest do lightest
+        // Different variants
         //var charsString = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,"^`'. ";
         //var charsString = "\" .:-=+*#%@\""; 
-        var charsString = "=+*#%@"; // My favorite variance so far
-        var charList = charsString.ToCharArray().Reverse().ToArray();
+        
+        var charsString = "@B%8&WM#*!\"^`'."; // My favorite variance so far
+        var charList = charsString.ToCharArray();
+        int resizeWidth;
+        int resizeHeight;
 
-        var resizeWidth = (int)(grayImage.Width / 1.2);
-        var resizeHeight = (grayImage.Height);
+        if (grayImage.Width > 300)
+        {
+            resizeWidth = (grayImage.Width / 10);
+            resizeHeight = (grayImage.Height / 10);
+            grayImage.Mutate(x => x.Resize(resizeWidth, resizeHeight));
+        }
+
+        resizeWidth = (int)(grayImage.Width / 1.2);
+        resizeHeight = (grayImage.Height);
         grayImage.Mutate(x => x.Resize(resizeWidth, resizeHeight));
 
-        using (var fileStream = new FileStream($"lenna.txt", FileMode.Create))
+        using (var fileStream = new FileStream($"{path}{fileName}", FileMode.Create))
         {
             grayImage.ProcessPixelRows(accessor =>
             {
@@ -133,7 +148,7 @@ public static class ImageConverter
 
                 for (int y = 0; y < accessor.Height; y++)
                 {
-                    
+
                     var currentRow = accessor.GetRowSpan(y);
                     foreach (ref var pixel in currentRow)
                     {
@@ -143,13 +158,12 @@ public static class ImageConverter
                     }
 
                     charRow.Add('\n');
-                    
                     var encoding = new UTF32Encoding();
                     var bytes = encoding.GetBytes(charRow.ToArray());
                     fileStream.Write(bytes, 0, bytes.Length);
-                    fileStream.Flush();
                     charRow.Clear();
                 }
+                fileStream.Flush();
             });
         }
 
