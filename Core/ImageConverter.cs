@@ -1,10 +1,8 @@
 ﻿using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using System;
-using System.Collections;
 using System.Diagnostics;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace ASCII_ART_GENERATOR.Service;
@@ -116,18 +114,18 @@ public static class ImageConverter
 
     public static void ConvertGrayScaleToAscii(Image<Rgba32> grayImage, string path, string fileName)
     {
-        
-
-
         // ASCII Character going from darkest do lightest
         // Different variants
         //var charsString = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,"^`'. ";
         //var charsString = "\" .:-=+*#%@\""; 
-        
-        var charsString = "@B%8&WM#*!\"^`'."; // My favorite variance so far
+
+        var charsString = "@B%8*!\"^`'."; // My favorite variance so far
         var charList = charsString.ToCharArray();
         int resizeWidth;
         int resizeHeight;
+
+
+
 
         if (grayImage.Width > 300)
         {
@@ -136,38 +134,67 @@ public static class ImageConverter
             grayImage.Mutate(x => x.Resize(resizeWidth, resizeHeight));
         }
 
-        resizeWidth = (int)(grayImage.Width / 1.2);
-        resizeHeight = (grayImage.Height);
-        grayImage.Mutate(x => x.Resize(resizeWidth, resizeHeight));
 
-        using (var fileStream = new FileStream($"{path}{fileName}", FileMode.Create))
+
+        void ShowResultOnTerminal()
         {
-            grayImage.ProcessPixelRows(accessor =>
-            {
-                var charRow = new List<char>();
-
-                for (int y = 0; y < accessor.Height; y++)
-                {
-
-                    var currentRow = accessor.GetRowSpan(y);
-                    foreach (ref var pixel in currentRow)
-                    {
-                        //TODO: bring grayscale transform logic to here to convert colored images directly to ascii
-                        var index = (int)((pixel.R / 255.0) * (charList.Length - 1));
-                        charRow.Add(charList[index]);
-                    }
-
-                    charRow.Add('\n');
-                    var encoding = new UTF32Encoding();
-                    var bytes = encoding.GetBytes(charRow.ToArray());
-                    fileStream.Write(bytes, 0, bytes.Length);
-                    charRow.Clear();
-                }
-                fileStream.Flush();
-            });
+            int fator = 2;
+            resizeWidth = grayImage.Width / fator;
+            resizeHeight = grayImage.Height / (fator * 2);
         }
 
 
+        resizeWidth = grayImage.Width;
+        resizeHeight = grayImage.Height / 2;
+
+        grayImage.Mutate(x => x.Resize(resizeWidth, resizeHeight));
+        char[] resultadoASCII = AindaNaoSei(grayImage);
+
+        FlushToTxtFile(resultadoASCII, path, fileName);
+
+    }
+
+    private static void FlushToTxtFile(char[] resultadoASCII, string path, string fileName)
+    {
+        try
+        {
+            using (var fileStream = new FileStream($"{path}{fileName}.txt", FileMode.Create))
+            {
+                var encoder = new UTF8Encoding();
+                var bytes = encoder.GetBytes(resultadoASCII, 0, resultadoASCII.Length - 1);
+                fileStream.Write(bytes);
+                fileStream.Flush();
+            }
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Falha ao salvar resultado ASCII no arquivo txt: " + ex.Message);
+        }
+    }
+
+    public static char[] AindaNaoSei(Image<Rgba32> image)
+    {
+        var charsString = "@B%8*!\"^`'."; // My favorite variance so far
+        var charList = charsString.ToCharArray();
+        var charRow = new char[image.Width];
+        image.ProcessPixelRows(accessor =>
+        {
+            var charRow = new List<char>();
+
+            for (int y = 0; y < accessor.Height; y++)
+            {
+
+                var currentRow = accessor.GetRowSpan(y);
+                foreach (ref var pixel in currentRow)
+                {
+                    //TODO: bring grayscale transform logic to here to convert colored images directly to ascii
+                    var index = (int)((pixel.R / 255.0) * (charList.Length - 1));
+                    charRow.Add(charList[index]);
+                }
+                charRow.Add('\n');
+            }
+        });
+        return charRow;
     }
 
 }

@@ -9,22 +9,16 @@ public class Program
     {
         var basePath = "C:\\Users\\Vinic\\Documents\\programacao\\desafios\\ASCII_Art_Generator\\images\\";
 
-        var inputFileName = "lenna.png";
+        var inputFileName = "vegeta.png";
         var inputFilePath = basePath + "source\\" + inputFileName;
-        string path = "C:\\Users\\Vinic\\Documents\\programacao\\desafios\\ASCII_Art_Generator\\images\\output\\";
-        string fileNamePrefix = inputFileName.Split(".")[0];
-        string fileName = $"{fileNamePrefix}.txt";
-        //var outPutFileName = "vegeta-B&W.png";
-        //var outPutFilePath = basePath + "output\\" + outPutFileName;
-        //using (FileStream outputFileStream = new FileStream(outPutFilePath, FileMode.Create))
+
+        string outputPath = "C:\\Users\\Vinic\\Documents\\programacao\\desafios\\ASCII_Art_Generator\\images\\output\\";
+        string fileName = inputFileName.Split(".")[0];
 
         using (var image = ImageIngest.LoadImage(inputFilePath))
         using (var imageGrayScale = ImageConverter.ConvertToGrayScale(image))
         {
-
-            ImageConverter.ConvertGrayScaleToAscii(imageGrayScale, path, fileName);
-
-
+            ImageConverter.ConvertGrayScaleToAscii(imageGrayScale, outputPath, fileName);
         }
         
 
